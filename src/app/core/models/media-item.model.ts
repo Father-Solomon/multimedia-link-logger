@@ -1,5 +1,4 @@
 import {LoggedMediaItemInterface} from "../interfaces/logged-media-item.interface";
-import {PositionInterface} from "../interfaces/position.interface";
 
 export class MediaItem {
   private _item: LoggedMediaItemInterface = {
@@ -14,6 +13,7 @@ export class MediaItem {
       width: 0,
     }
   }
+
   constructor(id: number, url: string, type: 'video' | 'image') {
     this._item.id = id;
     this._item.name = url;

@@ -2,7 +2,7 @@
 <ng-container *ngIf="mediaList$ | async as list">
   <!--  TODO add TrackBy-->
   <ng-container *ngFor="let key of keys">
-    <app-media-card [media]="list[key]" cdkDrag (cdkDragEnded)="dragEnded($event, list[key].id)"></app-media-card>
+    <app-media-card [media]="list[key]" cdkDrag></app-media-card>
   </ng-container>
 </ng-container>
 

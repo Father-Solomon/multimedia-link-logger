@@ -1,19 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { LinkFormComponent } from '../features/resizable-media/components/link-form/link-form.component';
-import { DragDropDirective } from './directives/drag-drop.directive';
-import { ResizeDirective } from './directives/resize.directive';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-
+// TODO in current case this module is redundant
 
 @NgModule({
-  declarations: [
-    LinkFormComponent,
-    DragDropDirective,
-    ResizeDirective,
-  ],
-  imports: [
-    CommonModule
-  ]
+  imports: [CommonModule]
 })
-export class SharedModule { }
+export class SharedModule {
+}

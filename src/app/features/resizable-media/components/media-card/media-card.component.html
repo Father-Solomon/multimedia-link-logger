@@ -5,7 +5,7 @@
   <div class="media-card-header">
     <div class="media-card--title">I can be dragged by the header</div>
     <div class="close-button-container">
-      <button mat-icon-button color="warn" aria-label="Example icon button with a delete icon" (click)="emitRemoveMedia(media.id)">
+      <button mat-icon-button color="warn" aria-label="Example icon button with a delete icon" (click)="removeMedia(media.id)">
         <mat-icon>close</mat-icon>
       </button>
     </div>
@@ -13,8 +13,7 @@
   <div class="media-card-content" *ngIf="media.type === 'image'; else videoWrapper">
     <img [src]="media.url"  [style.width.px]="width" alt="">
   </div>
-  <div class="resize-action" (mousedown)="$event.stopPropagation(); onResize($event)"></div>
-
+  <div class="resize-action" (mousedown)="$event.stopPropagation(); onResize()"></div>
 </div>
 
 <ng-template #videoWrapper>

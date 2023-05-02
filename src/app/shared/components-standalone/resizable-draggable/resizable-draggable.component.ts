@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, HostListener, Input, ViewChild} from '@angular/core';
 import {CommonModule} from "@angular/common";
-
+// TODO Possibility solution but less optimized
 const enum Status {
   OFF = 0,
   RESIZE = 1,

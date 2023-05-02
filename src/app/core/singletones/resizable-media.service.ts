@@ -13,9 +13,6 @@ export class ResizableMediaService {
   // TODO it really bad solution course ad redundant renders, need to be changed with
   protected naiveDB$ = new BehaviorSubject<any>({})
 
-  constructor() {
-  }
-
   public get media$(): Observable<LoggedMediaItemInterface[]> {
     return this.naiveDB$.asObservable();
   }
@@ -25,20 +22,13 @@ export class ResizableMediaService {
   }
 
   addMedia(url: string, type: 'video' | 'image') {
-    const id = this.currentID.getValue() + 1;
-    this.currentID.next(id);
+    const id = this.currentID.getValue();
+    this.currentID.next(id + 1);
     const newMedia = new MediaItem(id, url, type);
-    const newObject = {[id]: newMedia};
-    console.log('newObject', newObject)
-    console.log('id', id)
-
     this.naiveDB$.next({
       ...this.list,
       [id]: newMedia.item,
     });
-
-    setTimeout(()=> {
-      console.log(this.list)},100)
   }
 
   updateMedia(id: number, position: Partial<PositionInterface>) {
@@ -51,13 +41,13 @@ export class ResizableMediaService {
     };
     this.naiveDB$.next({
       ...this.list,
-      id: updatedItem,
+      [id]: updatedItem,
     });
   }
 
   removeMedia(id: number) {
     const newList = {...this.list};
-    delete newList[0]
+    delete newList[id]
     this.naiveDB$.next({...newList});
   }
 
