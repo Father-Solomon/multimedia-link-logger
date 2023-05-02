@@ -43,6 +43,7 @@ export class MediaCardComponent implements AfterViewInit, OnDestroy {
     this.observer.observe(this.mediaCard.nativeElement);
     this.videoElement = this.video?.nativeElement;
     this.updateMedia();
+
     this.subscriptions.add(
       fromEvent(this.elementRef.nativeElement, 'mouseup')
         .subscribe((res: any) => {
@@ -70,11 +71,11 @@ export class MediaCardComponent implements AfterViewInit, OnDestroy {
   }
 
   onResize(): void {
-    // TODO not optimized (but it fun)
-
     this.removeMouseMoveListener = this.renderer.listen("document", "mousemove", event => {
+      // TODO here should be optimization with recalculation the width, to fix this issue need to taking taking into account
+      //  the fact that the parent component also has a transform
       this.width = event.pageX - this.left;
-      this.height = event.pageY - this.top
+      this.height = event.pageY - this.top;
       this.updateMedia();
       this.removeMouseUpListener = this.renderer.listen("document", "mouseup", event => {
         this.removeMouseMoveListener();
@@ -88,11 +89,6 @@ export class MediaCardComponent implements AfterViewInit, OnDestroy {
   }
 
   updateMedia(): void {
-    this.top = this.mediaCard.nativeElement.getBoundingClientRect().top;
-    this.left = this.mediaCard.nativeElement.getBoundingClientRect().left;
-    this.width = this.mediaCard.nativeElement.getBoundingClientRect().width;
-    this.height = this.mediaCard.nativeElement.getBoundingClientRect().height;
-
     this.resizableMediaService.updateMedia(this.media.id, {
       top: this.top,
       left: this.left,
