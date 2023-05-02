@@ -1,0 +1,7 @@
+<app-header></app-header>
+<app-link-form></app-link-form>
+<ng-container *ngFor="let media of fakeDB; index as i">
+<!--  TODO add TrackBy-->
+  <app-media-card [media]="media" cdkDrag (cdkDragEnded)="dragEnded($event, media.id)"></app-media-card>
+</ng-container>
+

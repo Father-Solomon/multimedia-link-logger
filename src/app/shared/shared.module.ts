@@ -10,7 +10,7 @@ import { ResizeDirective } from './directives/resize.directive';
   declarations: [
     LinkFormComponent,
     DragDropDirective,
-    ResizeDirective
+    ResizeDirective,
   ],
   imports: [
     CommonModule

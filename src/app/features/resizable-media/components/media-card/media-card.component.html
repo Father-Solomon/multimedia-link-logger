@@ -1,0 +1,37 @@
+<div #mediaCard
+      class="media-card"
+     [style.width.px]="width"
+>
+  <div class="media-card-header">
+    <div class="media-card--title">I can be dragged by the header</div>
+    <div class="close-button-container">
+      <button mat-icon-button color="warn" aria-label="Example icon button with a delete icon" (click)="removeMedia(media.id)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="media-card-content" *ngIf="media.type === 'image'; else videoWrapper">
+    <img [src]="media.url"  [style.width.px]="width" alt="">
+  </div>
+  <div class="resize-action" (mousedown)="$event.stopPropagation(); onResize($event)"></div>
+
+</div>
+
+<ng-template #videoWrapper>
+  <div class="media-card-content">
+    <video
+      #video
+      [style.width.px]="width"
+      [src]="media.url"
+    ></video>
+  </div>
+  <div class="media-card-actions">
+    <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon" (click)="onPlay()">
+      <ng-container *ngIf="isPlaying; else playIcon">
+        <mat-icon>pause_circle_outline</mat-icon>
+      </ng-container>
+      <ng-template #playIcon><mat-icon>play_circle_outline</mat-icon></ng-template>
+
+     </button>
+  </div>
+</ng-template>
