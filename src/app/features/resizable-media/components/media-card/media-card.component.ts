@@ -42,16 +42,14 @@ export class MediaCardComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.observer.observe(this.mediaCard.nativeElement);
     this.videoElement = this.video?.nativeElement;
+    this.updateMedia();
     this.subscriptions.add(
       fromEvent(this.elementRef.nativeElement, 'mouseup')
         .subscribe((res: any) => {
-          this.top = this.mediaCard.nativeElement.getBoundingClientRect().top;
-          this.left = this.mediaCard.nativeElement.getBoundingClientRect().left;
           this.updateMedia();
         })
     )
   }
-
   ngOnDestroy() {
     this.observer.disconnect();
     this.removeMouseMoveListener();
@@ -64,7 +62,6 @@ export class MediaCardComponent implements AfterViewInit, OnDestroy {
     this.height = entries[0].target.getBoundingClientRect().height;
     this.top = entries[0].target.getBoundingClientRect().top;
     this.left = entries[0].target.getBoundingClientRect().left;
-    this.updateMedia();
   }
 
   onPlay() {
@@ -73,16 +70,13 @@ export class MediaCardComponent implements AfterViewInit, OnDestroy {
   }
 
   onResize(): void {
-    // TODO not optimized
+    // TODO not optimized (but it fun)
 
     this.removeMouseMoveListener = this.renderer.listen("document", "mousemove", event => {
-      console.log(`I am detecting mousemove at ${event.pageX}, ${event.pageY} on Document!`);
       this.width = event.pageX - this.left;
       this.height = event.pageY - this.top
       this.updateMedia();
       this.removeMouseUpListener = this.renderer.listen("document", "mouseup", event => {
-
-        console.log(`I am detecting mouseUp at ${event.pageX}, ${event.pageY} on Document!`);
         this.removeMouseMoveListener();
         this.removeMouseUpListener();
       });
@@ -94,6 +88,11 @@ export class MediaCardComponent implements AfterViewInit, OnDestroy {
   }
 
   updateMedia(): void {
+    this.top = this.mediaCard.nativeElement.getBoundingClientRect().top;
+    this.left = this.mediaCard.nativeElement.getBoundingClientRect().left;
+    this.width = this.mediaCard.nativeElement.getBoundingClientRect().width;
+    this.height = this.mediaCard.nativeElement.getBoundingClientRect().height;
+
     this.resizableMediaService.updateMedia(this.media.id, {
       top: this.top,
       left: this.left,
