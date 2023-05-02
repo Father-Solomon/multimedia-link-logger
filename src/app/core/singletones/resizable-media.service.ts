@@ -9,7 +9,7 @@ import {PositionInterface} from "../interfaces/position.interface";
   providedIn: 'root'
 })
 export class ResizableMediaService {
-  currentID = new BehaviorSubject<number>(0)
+  currentID = new BehaviorSubject<number>(1)
   // TODO it really bad solution course ad redundant renders, need to be changed with
   protected naiveDB$ = new BehaviorSubject<any>({})
 
@@ -26,12 +26,19 @@ export class ResizableMediaService {
 
   addMedia(url: string, type: 'video' | 'image') {
     const id = this.currentID.getValue() + 1;
+    this.currentID.next(id);
     const newMedia = new MediaItem(id, url, type);
+    const newObject = {[id]: newMedia};
+    console.log('newObject', newObject)
+    console.log('id', id)
 
     this.naiveDB$.next({
       ...this.list,
-      id: newMedia.item,
+      [id]: newMedia.item,
     });
+
+    setTimeout(()=> {
+      console.log(this.list)},100)
   }
 
   updateMedia(id: number, position: Partial<PositionInterface>) {

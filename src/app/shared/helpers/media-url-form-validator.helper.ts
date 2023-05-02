@@ -1,12 +1,14 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from "@angular/forms";
 import {mediaExtensionResolver} from "./media-extension-resolver.helper";
 
-// export function notMedia(url: string): ValidatorFn {
-//   return (control: AbstractControl): ValidationErrors | null => {
-//     const notMedia = !mediaExtensionResolver(url);
-//     return notMedia ? {wrongURL: 'Choose another link'} : null;
-//   };
-// }
+// TODO variants for form validation
+
+export function notMediaFunction(url: string): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const notMedia = !mediaExtensionResolver(url);
+    return notMedia ? {wrongURL: 'Choose another link'} : null;
+  };
+}
 
 export const notMedia: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const url = control.get('url');

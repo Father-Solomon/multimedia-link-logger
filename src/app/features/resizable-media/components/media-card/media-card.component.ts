@@ -22,7 +22,7 @@ import {fromEvent, Subscription} from "rxjs";
 export class MediaCardComponent implements AfterViewInit {
   @Input() media: LoggedMediaItemInterface = {} as LoggedMediaItemInterface;
   @Output() changeSizeOrPosition = new EventEmitter<PositionInterface>();
-  @Output() removeMediaItem = new EventEmitter<number>();
+  @Output() removeMedia = new EventEmitter<number>();
   @ViewChild('video') video: ElementRef | undefined;
   @ViewChild('mediaCard') mediaCard!: ElementRef;
   width = 600
@@ -130,7 +130,7 @@ export class MediaCardComponent implements AfterViewInit {
     console.log(event)
   }
 
-  removeMedia(id: number) {
-    this.removeMediaItem.emit(id);
+  emitRemoveMedia(id: number) {
+    this.removeMedia.emit(id);
   }
 }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {LoggedMediaItemInterface} from "../../core/interfaces/logged-media-item.interface";
+import {ResizableMediaService} from "../../core/singletones/resizable-media.service";
+import {Observable, tap} from "rxjs";
 
 export const fakeDB: LoggedMediaItemInterface[] = [
   {
@@ -35,7 +37,20 @@ export const fakeDB: LoggedMediaItemInterface[] = [
 })
 export class ResizableMediaComponent {
   public fakeDB = [...fakeDB];
+  mediaList$: Observable<any>;
+  keys: [] = [];
+
+  constructor(private resizableMediaService: ResizableMediaService) {
+    this.mediaList$ = resizableMediaService.media$.pipe(
+      tap((list: any) => this.keys = Object.keys(list) as [])
+    );
+  }
+
   dragEnded(event:any, id: number): void {
     console.log(id, event)
+  }
+
+  removeMedia(id: number): void {
+    this.resizableMediaService.removeMedia(id)
   }
 }

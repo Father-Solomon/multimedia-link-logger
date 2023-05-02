@@ -1,0 +1,54 @@
+.toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: #1976d2;
+  color: white;
+  font-weight: 600;
+  justify-content: space-between;
+  padding: 0 20px;
+
+  .logo-bundle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    img {
+      margin: 10px 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      margin-right: 15px;
+      min-width: 270px;
+
+      label,
+      .error-commentary {
+        min-height: 20px;
+      }
+
+      .error-commentary {
+        color: red;
+      }
+
+      input {
+        width: 250px;
+        &.cross-validation-error {
+          border: 3px solid red !important;
+          background-color: lightcoral;
+        }
+      }
+    }
+  }
+
+  button {
+    padding: 5px 10px;
+  }
+}

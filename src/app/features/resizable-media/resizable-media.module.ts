@@ -6,7 +6,6 @@ import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import { ResizableMediaComponent } from './resizable-media.component';
-import {LinkFormComponent} from "./components/link-form/link-form.component";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import { HeaderComponent } from './components/header/header.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -18,7 +17,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
   declarations: [
     MediaCardComponent,
     ResizableMediaComponent,
-    LinkFormComponent,
     HeaderComponent
   ],
   imports: [

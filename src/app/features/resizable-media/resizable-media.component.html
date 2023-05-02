@@ -1,7 +1,8 @@
 <app-header></app-header>
-<app-link-form></app-link-form>
-<ng-container *ngFor="let media of fakeDB; index as i">
-<!--  TODO add TrackBy-->
-  <app-media-card [media]="media" cdkDrag (cdkDragEnded)="dragEnded($event, media.id)"></app-media-card>
+<ng-container *ngIf="mediaList$ | async as list">
+  <!--  TODO add TrackBy-->
+  <ng-container *ngFor="let key of keys">
+    <app-media-card [media]="list[key]" cdkDrag (cdkDragEnded)="dragEnded($event, list[key].id)"></app-media-card>
+  </ng-container>
 </ng-container>
 
